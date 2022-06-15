@@ -1,0 +1,44 @@
+{
+  "id": "3463925",
+  "name": "vue3-shop",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "7338642",
+      "name": "个人",
+      "font_class": "geren",
+      "unicode": "e6ae",
+      "unicode_decimal": 59054
+    },
+    {
+      "icon_id": "7338644",
+      "name": "更多",
+      "font_class": "gengduo",
+      "unicode": "e6af",
+      "unicode_decimal": 59055
+    },
+    {
+      "icon_id": "7338648",
+      "name": "购物车",
+      "font_class": "gouwuche",
+      "unicode": "e6b0",
+      "unicode_decimal": 59056
+    },
+    {
+      "icon_id": "7338651",
+      "name": "爱心",
+      "font_class": "aixin",
+      "unicode": "e6ad",
+      "unicode_decimal": 59053
+    },
+    {
+      "icon_id": "26201883",
+      "name": "音乐",
+      "font_class": "a-06-01",
+      "unicode": "e77e",
+      "unicode_decimal": 59262
+    }
+  ]
+}

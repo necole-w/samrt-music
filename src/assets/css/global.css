@@ -1,0 +1,9 @@
+/* 全局样式表 */
+body,#app{
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  /* min-width: 500px; */
+  background-color: #ededed;
+  box-sizing: border-box;
+}
