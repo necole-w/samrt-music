@@ -25,10 +25,10 @@
         </ul>
         <div class="pullup-tips">
           <div v-if="!isPullUpLoad" class="before-trigger">
-            <span class="pullup-txt">明天再来吧</span>
+            <span class="pullup-txt">暂无更多歌单</span>
           </div>
           <div v-else class="after-trigger">
-            <span class="pullup-txt">明天再来吧</span>
+            <span class="pullup-txt">暂无更多歌单</span>
           </div>
         </div>
       </div>
@@ -110,7 +110,7 @@ export default {
     const getGd = async () => {
       const result = await getGdRecommend()
       data.list.push(...result.result)
-      console.log(data.list)
+      // console.log(data.list)
     }
     getGd()
     return { ...toRefs(data), getBanner, getGd }

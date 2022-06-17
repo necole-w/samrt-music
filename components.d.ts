@@ -10,7 +10,6 @@ declare module '@vue/runtime-core' {
     RouterView: typeof import('vue-router')['RouterView']
     SliderVue: typeof import('./src/components/base/slider/slider-vue.vue')['default']
     TabVue: typeof import('./src/components/tab/tab-vue.vue')['default']
-    VanButton: typeof import('vant/es')['Button']
     VanSwipe: typeof import('vant/es')['Swipe']
     VanSwipeItem: typeof import('vant/es')['SwipeItem']
   }
