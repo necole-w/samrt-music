@@ -1,5 +1,8 @@
 <template>
-<div class="img"><img :src="img"></div>
+<div class="img">
+<span class="back" @click="goBack"><img src="@/assets/images/back.png"></span>
+<span class="singName">{{name}}</span>
+<img :src="img"></div>
    <div class="horizontal-container">
     <div class="scroll-wrapper" ref="wrapper">
       <div class="scroll-content">
@@ -16,20 +19,26 @@ import BScroll from '@better-scroll/core'
 import { ref, onMounted, reactive, toRefs } from 'vue'
 import { useRoute } from 'vue-router'
 import { getArtistsongs } from '@/serve/artists'
+import route from '@/router/index'
 export default {
   setup () {
     const data = reactive({
       id: '',
-      img: ''
+      img: '',
+      name: ''
     })
     const wrapper = ref(null)
     const song = ref({})
     const router = useRoute()
-
+    // 返回上一页
+    const goBack = () => {
+      route.push({ path: '/singer' })
+    }
     // 获取歌手id及img
     const getSinger = () => {
       data.id = router.query.id
       data.img = router.query.img
+      data.name = router.query.name
     }
     getSinger()
     // 获取歌手热门音乐前50首
@@ -50,7 +59,7 @@ export default {
 
     )
 
-    return { wrapper, router, getSinger, ...toRefs(data), Artistsongs, song }
+    return { wrapper, router, getSinger, ...toRefs(data), Artistsongs, song, goBack }
   }
 }
 </script>
@@ -63,6 +72,26 @@ export default {
   overflow: hidden;
   img{
     width: 100%;
+  }
+  .back{
+    position: absolute;
+    top:30px;
+    left:30px;
+    width: 30px;
+    height:30px;
+    // background-color: rgb(194, 74, 74);
+  }
+  .singName{
+    position: absolute;
+    top:20px;
+    left:50%;
+    transform: translateX(-50%);
+    // width: 30px;
+    font-weight:700 ;
+    height:30px;
+    color:rgb(156, 156, 156);
+        font-size: 20px;
+    // background-color: rgb(194, 74, 74);
   }
 }
 .horizontal-container{

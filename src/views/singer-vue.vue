@@ -6,7 +6,7 @@
     <div class="wrapper" ref="wrapper">
        <div class="box" ref="box">
         <ul class="content" ref="content" >
-            <li v-for="item in artists" :key="item.id" @click="songpage(item.img1v1Url,item.id)" >
+            <li v-for="item in artists" :key="item.id" @click="songpage(item.img1v1Url,item.id,item.name)" >
 
            <img  v-lazy="item.picUrl" >
 
@@ -50,8 +50,8 @@ export default {
     const wrapper = ref(null)
     const func = delayPrint()
     // 点击歌手跳转页面
-    const songpage = (img, id) => {
-      router.push({ path: '/songs', query: { img, id } })
+    const songpage = (img, id, name) => {
+      router.push({ path: '/songs', query: { img, id, name } })
     }
 
     // 未完成提示
