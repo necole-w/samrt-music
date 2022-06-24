@@ -5,14 +5,14 @@
   <div class="wrapperbox">
     <div class="wrapper" ref="wrapper">
        <div class="box" ref="box">
-        <ul class="content" ref="content">
-            <li v-for="item in artists" :key="item.id">
-           <a href="javascript:;">
-           <img  v-lazy="item.picUrl">
+        <ul class="content" ref="content" >
+            <li v-for="item in artists" :key="item.id" @click="songpage(item.img1v1Url,item.id)" >
+
+           <img  v-lazy="item.picUrl" >
 
            <i>
            {{item.name}}
-           </i></a>
+           </i>
             </li>
         </ul>
 
@@ -20,7 +20,7 @@
 
   </div>
   </div>
-  <span class="rmartist" ref="rmartist">歌手</span>
+  <span class="rmartist" ref="rmartist" @click="title">歌手</span>
   </div>
 </div>
 
@@ -29,6 +29,7 @@
 <script>
 import { reactive, toRefs, ref } from 'vue'
 import { getArtists, getArtist } from '@/serve/artists'
+import router from '@/router/index'
 import BScroll from '@better-scroll/core'
 export default {
 
@@ -48,7 +49,16 @@ export default {
     const box = ref(null)
     const wrapper = ref(null)
     const func = delayPrint()
+    // 点击歌手跳转页面
+    const songpage = (img, id) => {
+      router.push({ path: '/songs', query: { img, id } })
+    }
 
+    // 未完成提示
+    const title = () => {
+      console.log(11)
+      alert('该功能还在加急开发中')
+    }
     // 折叠防抖?
     function delayPrint () {
       return function () {
@@ -100,14 +110,15 @@ export default {
       setTimeout(() => {
         scroll.value = new BScroll(wrapper.value, {
           scrollY: true,
-          click: true
-        // probeType: 3
+          click: true,
+          stopPropagation: true
         })
       }, 20)
       setTimeout(() => {
         scroll.value = new BScroll(bigBox.value, {
           scrollY: true,
-          click: true
+          click: true,
+          stopPropagation: true
         // probeType: 3
         })
       }, 20)
@@ -117,11 +128,11 @@ export default {
     const getSinger = async () => {
       const res = await getArtist()
       data.artist.push(res.artists)
-      console.log(data.artist)
+      // console.log(data.artist)
     }
     getSinger()
 
-    return { getSingers, ...toRefs(data), Change, box, wrapper, rmartists, bigBox, rmartist, func, getSinger }
+    return { getSingers, ...toRefs(data), Change, box, wrapper, rmartists, bigBox, rmartist, func, getSinger, title, songpage }
   }
 }
 </script>

@@ -1,5 +1,5 @@
 <template>
-<!-- 轮播图 -->
+<div><!-- 轮播图 -->
   <van-swipe class="my-swipe" :autoplay="3000" indicator-color="white">
   <van-swipe-item
    v-for="banner in banners"
@@ -33,7 +33,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </div></div>
 </template>
 
 <script>
@@ -184,7 +184,7 @@ height: 100%;
   border-radius:7px;
   margin-right:20px;
   // overflow: hidden;
-  background-color: rgb(186, 83, 83);
+  // background-color: rgb(186, 83, 83);
 
 }
     }
