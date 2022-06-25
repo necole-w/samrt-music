@@ -7,7 +7,7 @@
     <div class="scroll-wrapper" ref="wrapper">
       <div class="scroll-content">
         <ul>
-          <li v-for="item in song" :key="item.id">{{item.name}}</li>
+          <li @click="goPlayer(item.id)" v-for="item in song" :key="item.id">{{item.name}}</li>
         </ul>
       </div>
     </div>
@@ -27,6 +27,10 @@ export default {
       img: '',
       name: ''
     })
+    // 点击歌曲 进入播放页面
+    const goPlayer = (id) => {
+      route.push({ path: '/player', query: { id } })
+    }
     const wrapper = ref(null)
     const song = ref({})
     const router = useRoute()
@@ -45,6 +49,7 @@ export default {
     const Artistsongs = async () => {
       const res = await getArtistsongs(data.id)
       song.value = res.songs
+      // console.log(song.value)
       setTimeout(() => {
         scroll.value = new BScroll(wrapper.value, {
           scrollY: true,
@@ -59,7 +64,7 @@ export default {
 
     )
 
-    return { wrapper, router, getSinger, ...toRefs(data), Artistsongs, song, goBack }
+    return { wrapper, router, getSinger, ...toRefs(data), Artistsongs, song, goBack, goPlayer }
   }
 }
 </script>
@@ -75,7 +80,7 @@ export default {
   }
   .back{
     position: absolute;
-    top:30px;
+    top:20px;
     left:30px;
     width: 30px;
     height:30px;

@@ -4,5 +4,5 @@ export function getRecommend () {
   return get('/banner?type=2')
 }
 export function getGdRecommend () {
-  return get('/personalized?limit=150')
+  return get('/top/playlist?limit=200&cat=华语')
 }

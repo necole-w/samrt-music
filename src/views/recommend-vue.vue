@@ -14,9 +14,11 @@
       <div class="pullup-content">
         <ul class="pullup-list">
 
-          <li v-for="item in list" :key="item.id" class="pullup-list-item">
+          <li v-for="item in list" :key="item.id" class="pullup-list-item"
+          @click="xiangqing(item.id)"
+          >
 
-          <img  v-lazy="item.picUrl">
+          <img  v-lazy="item.coverImgUrl">
 
            <i>
            {{item.name}}
@@ -39,6 +41,7 @@
 <script>
 import BScroll from '@better-scroll/core'
 import Pullup from '@better-scroll/pull-up'
+import router from '@/router/index.js'
 import { reactive, toRefs } from 'vue'
 import { getRecommend, getGdRecommend } from '../serve/recommended'
 
@@ -56,7 +59,8 @@ export default {
   methods: {
     initBscroll () {
       this.bscroll = new BScroll(this.$refs.scroll, {
-        pullUpLoad: true
+        pullUpLoad: true,
+        click: true
       })
 
       this.bscroll.on('pullingUp', this.pullingUpHandler)
@@ -98,6 +102,10 @@ export default {
       // 推荐歌曲
       list: []
     })
+    // 歌单详情
+    const xiangqing = (id) => {
+      router.push({ path: '/recommendList', query: { id } })
+    }
     // 获取轮播图数据
     const getBanner = async () => {
       const result = await getRecommend()
@@ -109,17 +117,18 @@ export default {
     // 获取推荐歌单
     const getGd = async () => {
       const result = await getGdRecommend()
-      data.list.push(...result.result)
+      console.log(result)
+      data.list.push(...result.playlists)
       // console.log(data.list)
     }
     getGd()
-    return { ...toRefs(data), getBanner, getGd }
+    return { ...toRefs(data), getBanner, getGd, xiangqing }
   }
 
 }
 </script >
 
-<style lang="scss" type="scoped">
+<style lang="scss" scoped>
 .gdRecommend{
   width: 100%;
   display:inline-block;

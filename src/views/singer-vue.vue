@@ -137,7 +137,7 @@ export default {
 }
 </script>
 
-<style lang="scss" type="scoped">
+<style lang="scss" scoped>
 
 .rmartists{
   width: 100%;
