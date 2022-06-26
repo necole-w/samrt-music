@@ -133,7 +133,7 @@ export default {
   width: 100%;
   display:inline-block;
   height: 50px;
-  color: rgb(102, 102, 102);
+  color:#666;
   font-weight: 700;
   line-height: 50px;
   padding-left:20px;

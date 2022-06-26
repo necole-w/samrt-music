@@ -45,6 +45,7 @@ export default {
       console.log(res)
       console.log(res.data[0].url)
       data.url = res.data[0].url
+      if (res.data[0].url === null) alert('暂无播放源')
     }
     onBeforeMount(() => {
       getUrl()

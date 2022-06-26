@@ -1,13 +1,23 @@
 <template>
- <div class="horizontal-container">
-    <div class="scroll-wrapper" ref="wrapper">
-      <div class="scroll-content">
-        <ul>
-          <li @click="goPlayer(item.id)" v-for="item in songlist" :key="item.id">{{item.name}}</li>
+<div class="bottomBox">
+      <div ref="wrapper" class="wrapper">
+       <div class="content">
+        <ul class="list">
+          <li  v-for="item in songlist" :key="item.id" class="list-item"
+          @click="goPlayer(item.id)"
+          >
+
+          <img  v-lazy="item.al.picUrl">
+
+           <i>
+           {{item.name}}
+           </i>
+          </li>
         </ul>
       </div>
     </div>
   </div>
+
 </template>
 
 <script>
@@ -52,36 +62,40 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.horizontal-container{
+.bottomBox {
+ .wrapper{
+  // background-color: rgb(211, 51, 51);
+
+  border-radius:.1em;
   width: 100%;
-  // background-color: rgb(213, 99, 99);
-  .scroll-wrapper{
+  height: 100vh;
+  .content{
 
-    margin: 0 10px;
-    height: 100vh;
-    border: 1px solid #ccc;
-    overflow: hidden;
-    // background-color: rgb(55, 164, 28);
-    .scroll-content
-      {
-        // height: 100%;
-      //  background-color: rgb(190, 32, 32);
-       li {
-        padding: 0 30px ;
-        list-style: none;
-        border-bottom: 1px solid #ccc;
-        width: 100%;
-        height: 75px;
-        word-break: break-all;
-        overflow: hidden;
-        line-height: 75px;
-        font-size: 20px;
-        color:#333;
-        font-style: normal;}
-       }
-
-  }
-
+    border-radius: 50px;
+     width: 100%;
+     background-color:#fff;
+    .list{
+      padding:0 0.5em;
+        .list-item{
+    border-bottom: 1px solid #ccc;
+     padding:10px;
+      display:flex;
+img{
+  width: 25%;
+  border-radius: 10%;
 }
+i{
+    overflow: hidden;
+    line-height: 500%;
+    font-size: 17px;
+    padding-left:30px;
+    color:#333;
+    font-style: normal;
+}
+        }
 
+    }
+  }
+ }
+}
 </style>

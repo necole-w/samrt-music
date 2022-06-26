@@ -41,6 +41,7 @@ export default {
 
 <style  lang="scss" type="scoped">
 .tab{
+  z-index:99999;
   display: flex;
   height: 44px;
   background-image: linear-gradient(90deg,#222325,#3b3c3f,#222325);

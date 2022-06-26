@@ -13,6 +13,7 @@ export default {
 
 <style scoped>
 .header{
+  z-index:999;
   height: 44px;
   text-align: center;
   background-image: linear-gradient(90deg,#222325,#3b3c3f,#222325);
