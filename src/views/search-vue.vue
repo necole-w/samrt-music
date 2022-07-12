@@ -2,8 +2,8 @@
   <div class="box">
   <!-- 搜索栏 -->
      <form class="search">
-       <input placeholder="search" type="text" v-model="input">
-       <button  class="iconfont icon-xuanze1" @click="getSearchResults" ></button>
+       <input :placeholder="defaultsearch" type="text" v-model="input">
+       <button  class="iconfont icon-xuanze1" @click="getSearchResults"></button>
      </form>
      <!-- 搜索结果 -->
      <div class="bottomBox">
@@ -12,7 +12,7 @@
         <ul class="list">
 
           <li v-for="item in songs" :key="item.id" class="list-item"
-          @click="xiangqing(item.id)"
+          @click="xiangqing(item.id,item.al.picUrl)"
           >
 
           <img  v-lazy="item.al.picUrl">
@@ -29,28 +29,40 @@
 </template>
 
 <script>
-
+import { useStore } from 'vuex'
 import BScroll from '@better-scroll/core'
 import '@/assets/fonts/iconfont.css'
 import { reactive, toRefs, ref } from 'vue'
-import { Search } from '@/serve/search'
-import route from '@/router/index.js'
+import { Search, defaultSearch } from '@/serve/search'
 export default {
   setup () {
+    const store = useStore()
     const wrapper = ref(null)
     const data = reactive({
       input: '',
-      songs: []
+      songs: [],
+      defaultsearch: ''
     })
     // 点击搜索结果
-    const xiangqing = (id) => {
-      route.push({ path: '/player', query: { id } })
-      console.log(id)
+    const xiangqing = (id, img) => {
+      store.commit('showPlayer', { id, img })
+      store.commit('getlyricFalse')
     }
+    // 默认搜索栏
+    const getDefaultSearch = async () => {
+      const res = await defaultSearch()
+      data.defaultsearch = res.data.realkeyword
+    }
+    getDefaultSearch()
     // 搜索
     const getSearchResults = async () => {
+      if (data.input === '') {
+        data.input = data.defaultsearch
+      }
       const res = await Search(data.input)
       data.songs = res.result.songs
+      data.input = ''
+
       setTimeout(() => {
         scroll.value = new BScroll(wrapper.value, {
           scrollY: true,
@@ -58,7 +70,7 @@ export default {
         })
       }, 20)
     }
-    return { ...toRefs(data), getSearchResults, wrapper, xiangqing }
+    return { ...toRefs(data), getSearchResults, wrapper, xiangqing, getDefaultSearch, store }
   }
 
 }
@@ -99,8 +111,8 @@ export default {
     }
     button{
       opacity: 0;
-      width: 35px;
-      height: 70%;
+      width: 40px;
+      height: 40px;
       margin-left:16px;
       color:#666;
       border:none;
@@ -113,12 +125,12 @@ export default {
  .wrapper{
   // background-color: rgb(211, 51, 51);
 
-  border-radius:.1em;
+  // border-radius:.1em;
   width: 100%;
   height: 83vh;
   .content{
 
-    border-radius: 50px;
+    border-radius:1.5em;
      width: 100%;
      background-color:#fff;
     .list{
@@ -133,6 +145,8 @@ img{
 }
 i{
     overflow: hidden;
+    text-overflow: ellipsis;/*文字隐藏后添加省略号*/
+    white-space: nowrap;/*强制不换行*/
     line-height: 500%;
     font-size: 17px;
     padding-left:30px;

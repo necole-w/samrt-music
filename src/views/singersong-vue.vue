@@ -1,5 +1,6 @@
 <template>
-<div class="img">
+
+ <div class="img">
 <span class="back" @click="goBack"><img src="@/assets/images/back.png"></span>
 <span class="singName">{{name}}</span>
 <img :src="img"></div>
@@ -7,14 +8,16 @@
     <div class="scroll-wrapper" ref="wrapper">
       <div class="scroll-content">
         <ul>
-          <li @click="goPlayer(item.id)" v-for="item in song" :key="item.id">{{item.name}}</li>
+          <li @click="goPlayer(item.id,item.al.picUrl)" v-for="item in song" :key="item.id">{{item.name}}</li>
         </ul>
       </div>
     </div>
   </div>
+
 </template>
 
 <script >
+import { useStore } from 'vuex'
 import BScroll from '@better-scroll/core'
 import { ref, onMounted, reactive, toRefs } from 'vue'
 import { useRoute } from 'vue-router'
@@ -22,14 +25,16 @@ import { getArtistsongs } from '@/serve/artists'
 import route from '@/router/index'
 export default {
   setup () {
+    const store = useStore()
     const data = reactive({
       id: '',
       img: '',
       name: ''
     })
-    // 点击歌曲 进入播放页面
-    const goPlayer = (id) => {
-      route.push({ path: '/player', query: { id } })
+    // 点击歌曲 显示播放页面
+    const goPlayer = (id, img) => {
+      store.commit('showPlayer', { id, img })
+      store.commit('getlyricFalse')
     }
     const wrapper = ref(null)
     const song = ref({})
@@ -40,6 +45,7 @@ export default {
     }
     // 获取歌手id及img
     const getSinger = () => {
+      // console.log(router)
       data.id = router.query.id
       data.img = router.query.img
       data.name = router.query.name
@@ -64,7 +70,7 @@ export default {
 
     )
 
-    return { wrapper, router, getSinger, ...toRefs(data), Artistsongs, song, goBack, goPlayer }
+    return { wrapper, router, getSinger, ...toRefs(data), Artistsongs, song, goBack, goPlayer, store }
   }
 }
 </script>

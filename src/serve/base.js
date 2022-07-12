@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const baseURL = 'https://music-7qqgl5tp4-necole-w.vercel.app'
+const baseURL = 'http://necole.top:3000'
 
 axios.defaults.baseURL = baseURL
 

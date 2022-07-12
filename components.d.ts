@@ -6,12 +6,15 @@ import '@vue/runtime-core'
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     HeaderVue: typeof import('./src/components/Header-vue.vue')['default']
+    IpVue: typeof import('./src/components/ip-vue.vue')['default']
     PlayerVue: typeof import('./src/components/player/player-vue.vue')['default']
     RecommendedListVue: typeof import('./src/components/recommendedList-vue.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
-    SliderVue: typeof import('./src/components/base/slider/slider-vue.vue')['default']
     TabVue: typeof import('./src/components/tab/tab-vue.vue')['default']
+    VanButton: typeof import('vant/es')['Button']
+    VanSlider: typeof import('vant/es')['Slider']
+    VanSticky: typeof import('vant/es')['Sticky']
     VanSwipe: typeof import('vant/es')['Swipe']
     VanSwipeItem: typeof import('vant/es')['SwipeItem']
   }

@@ -3,8 +3,9 @@
   <van-swipe class="my-swipe" :autoplay="3000" indicator-color="white">
   <van-swipe-item
    v-for="banner in banners"
-   :key="banner.targetId">
-  <img :src="banner.pic">
+   :key="banner.targetId"
+   >
+  <img :src="banner.pic" @click="getIp">
   </van-swipe-item>
 </van-swipe>
 <!-- 歌单推荐 -->
@@ -45,6 +46,7 @@ import router from '@/router/index.js'
 import { reactive, toRefs } from 'vue'
 import { getRecommend, getGdRecommend } from '../serve/recommended'
 
+// import { getUserIP } from '@/serve/ip'
 BScroll.use(Pullup)
 export default {
   data () {
@@ -95,6 +97,11 @@ export default {
     }
   },
   setup () {
+    const getIp = () => {
+      // const res = await getUserIP()
+      alert('加急开发中')
+    }
+
     const data = reactive({
       // 轮播图
       banners: '',
@@ -117,12 +124,12 @@ export default {
     // 获取推荐歌单
     const getGd = async () => {
       const result = await getGdRecommend()
-      console.log(result)
+      // console.log(result)
       data.list.push(...result.playlists)
       // console.log(data.list)
     }
     getGd()
-    return { ...toRefs(data), getBanner, getGd, xiangqing }
+    return { ...toRefs(data), getBanner, getGd, xiangqing, getIp }
   }
 
 }
@@ -137,7 +144,7 @@ export default {
   font-weight: 700;
   line-height: 50px;
   padding-left:20px;
-
+box-sizing: border-box;
   box-shadow: 0 10px 10px 0 rgb(0 0 0 / 5%);
 }
 .my-swipe .van-swipe-item {

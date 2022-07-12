@@ -2,7 +2,7 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
-import { Swipe, SwipeItem, List } from 'vant'
+import { Swipe, SwipeItem, List, Sticky } from 'vant'
 import lazyPlugin from 'vue3-lazy'
 
 const app = createApp(App)
@@ -13,6 +13,7 @@ app
     error: require('@/assets/images/logo.png')
   })
   .use(List)
+  .use(Sticky)
   .use(Swipe)
   .use(SwipeItem)
   .use(store).use(router).mount('#app')

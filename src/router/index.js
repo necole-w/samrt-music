@@ -3,10 +3,10 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 import Recommend from '@/views/recommend-vue.vue'
 import Search from '@/views/search-vue.vue'
 import Singer from '@/views/singer-vue.vue'
-import TopList from '@/views/top-list-vue.vue'
+// import TopList from '@/views/top-list-vue.vue'
 import Songs from '@/views/singersong-vue.vue'
 import Home from '@/views/HomeView.vue'
-import player from '@/components/player/player-vue.vue'
+// import player from '@/components/player/player-vue.vue'
 import RecommendList from '@/components/recommendedList-vue.vue'
 
 const routes = [
@@ -34,15 +34,6 @@ const routes = [
       component: Singer
     },
     {
-      path: '/top-list',
-      name: 'top-list',
-      meta: {
-        index: 3,
-        keepAlive: true
-      },
-      component: TopList
-    },
-    {
       path: '/search',
       name: 'search',
       meta: {
@@ -68,14 +59,6 @@ const routes = [
       keepAlive: true
     },
     component: RecommendList
-  },
-  {
-    path: '/player',
-    name: 'player',
-    meta: {
-      keepAlive: true
-    },
-    component: player
   }
 
 ]

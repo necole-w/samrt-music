@@ -27,6 +27,7 @@
 </template>
 
 <script>
+// import useStore from 'vuex'
 import { reactive, toRefs, ref } from 'vue'
 import { getArtists, getArtist } from '@/serve/artists'
 import router from '@/router/index'
@@ -49,14 +50,16 @@ export default {
     const box = ref(null)
     const wrapper = ref(null)
     const func = delayPrint()
+    // const store = useStore()
     // 点击歌手跳转页面
     const songpage = (img, id, name) => {
+      // console.log(img)
       router.push({ path: '/songs', query: { img, id, name } })
     }
 
     // 未完成提示
     const title = () => {
-      console.log(11)
+      // console.log(11)
       alert('该功能还在加急开发中')
     }
     // 折叠防抖?

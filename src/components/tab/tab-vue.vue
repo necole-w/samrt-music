@@ -26,10 +26,6 @@ export default {
           path: '/singer'
         },
         {
-          name: '排行',
-          path: '/top-list'
-        },
-        {
           name: '搜索',
           path: '/search'
         }
